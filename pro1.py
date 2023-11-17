@@ -1,5 +1,4 @@
 from langchain.chat_models import ChatOpenAI
-from dotenv import load_dotenv
 import os
 import pickle
 import sqlite3
@@ -183,7 +182,7 @@ def main():
 def chatbot(selected_id, conn, cursor):
     st.sidebar.markdown(f"## Chatbot: {selected_id}")
 
-    load_dotenv('key.env')
+    os.environ['OPENAI_API_KEY'] = st.secrets['OPENAI_API_KEY']
 
     if selected_id not in st.session_state.chatbots:
         st.session_state.chatbots[selected_id] = {"model": None, "temperature": 0.7, "max_tokens": 500, "vectordb": None}
